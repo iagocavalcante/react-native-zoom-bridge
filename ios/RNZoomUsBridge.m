@@ -126,8 +126,9 @@ RCT_EXPORT_METHOD(
   }
 }
 
-RCT_EXPORT_METHOD(hideMeeting:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject
+RCT_EXPORT_METHOD(
+  hideMeeting:(RCTPromiseResolveBlock)resolve
+  rejecter:(RCTPromiseRejectBlock)reject
 ) {
   @try {
     hideMeetingPromiseResolve = resolve;
