@@ -12,27 +12,31 @@ typedef enum {
 
 @implementation RNZoomUsBridge
 {
-  BOOL isInitialized;
-  RCTPromiseResolveBlock initializePromiseResolve;
-  RCTPromiseRejectBlock initializePromiseReject;
-  RCTPromiseResolveBlock meetingPromiseResolve;
-  RCTPromiseRejectBlock meetingPromiseReject;
-  RCTPromiseResolveBlock hideMeetingPromiseResolve;
-  RCTPromiseRejectBlock hideMeetingPromiseReject;
+    BOOL isInitialized;
+    RCTPromiseResolveBlock initializePromiseResolve;
+    RCTPromiseRejectBlock initializePromiseReject;
+    RCTPromiseResolveBlock meetingPromiseResolve;
+    RCTPromiseRejectBlock meetingPromiseReject;
+    RCTPromiseResolveBlock hideMeetingPromiseResolve;
+    RCTPromiseRejectBlock hideMeetingPromiseReject;
+    RCTPromiseResolveBlock showMeetingPromiseResolve;
+    RCTPromiseRejectBlock showMeetingPromiseReject;
 }
 
 static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
 
 - (instancetype)init {
-  if (self = [super init]) {
-    isInitialized = NO;
-    initializePromiseResolve = nil;
-    initializePromiseReject = nil;
-    meetingPromiseResolve = nil;
-    meetingPromiseReject = nil;
-    hideMeetingPromiseResolve = nil;
-    hideMeetingPromiseReject = nil;
-  }
+    if (self = [super init]) {
+        isInitialized = NO;
+        initializePromiseResolve = nil;
+        initializePromiseReject = nil;
+        meetingPromiseResolve = nil;
+        meetingPromiseReject = nil;
+        hideMeetingPromiseResolve = nil;
+        hideMeetingPromiseReject = nil;
+        showMeetingPromiseResolve = nil;
+        showMeetingPromiseReject = nil;
+    }
   return self;
 }
 
@@ -139,8 +143,25 @@ RCT_EXPORT_METHOD(
       }];
     }];
   } @catch (NSError *ex) {
-      reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing joinMeeting", ex);
+      reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing hideMeeting", ex);
   }
+}
+
+RCT_EXPORT_METHOD(
+  showMeeting:(RCTPromiseResolveBlock)resolve
+  rejecter:(RCTPromiseRejectBlock)reject
+) {
+    @try {
+        showMeetingPromiseResolve = resolve;
+        showMeetingPromiseReject = reject;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+          [[RNZoomUsManager sharedInstance] showMeeting:^(NSUInteger resultCode) {
+            resolve(@{});
+          }];
+        }];
+    } @catch (NSError *ex) {
+      reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing showMeeting", ex);
+    }
 }
 
 RCT_EXPORT_METHOD(createJWT: (NSString *)jwtApiKey

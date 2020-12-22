@@ -98,9 +98,21 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
     
   MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
   if (ms) {
-     MobileRTCMeetError result = [ms showMinimizeMeetingFromZoomUIMeeting];
-     NSLog(@"hideMeeting, hideMeeting=%d", result);
+    MobileRTCMeetError result = [ms showMinimizeMeetingFromZoomUIMeeting];
+    NSLog(@"hideMeeting, hideMeeting=%d", result);
     NSLog(@"hideMeeting called on native module");
+    completion(1);
+  }
+}
+
+- (void)showMeeting:(void (^_Nonnull)(NSUInteger resultCode))completion {
+  NSLog(@"showMeeting called on native module");
+    
+  MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
+  if (ms) {
+    MobileRTCMeetError result = [ms backZoomUIMeetingFromMinimizeMeeting];
+    NSLog(@"showMeeting, showMeeting=%d", result);
+    NSLog(@"showMeeting called on native module");
     completion(1);
   }
 }
