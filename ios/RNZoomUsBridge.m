@@ -17,6 +17,8 @@ typedef enum {
   RCTPromiseRejectBlock initializePromiseReject;
   RCTPromiseResolveBlock meetingPromiseResolve;
   RCTPromiseRejectBlock meetingPromiseReject;
+  RCTPromiseResolveBlock hideMeetingPromiseResolve;
+  RCTPromiseRejectBlock hideMeetingPromiseReject;
 }
 
 static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
@@ -28,6 +30,8 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
     initializePromiseReject = nil;
     meetingPromiseResolve = nil;
     meetingPromiseReject = nil;
+    hideMeetingPromiseResolve = nil;
+    hideMeetingPromiseReject = nil;
   }
   return self;
 }
@@ -114,6 +118,22 @@ RCT_EXPORT_METHOD(
 
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
       [[RNZoomUsManager sharedInstance] joinMeeting:meetingNumber userName:userName password:password completion:^(NSUInteger resultCode) {
+        resolve(@{});
+      }];
+    }];
+  } @catch (NSError *ex) {
+      reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing joinMeeting", ex);
+  }
+}
+
+RCT_EXPORT_METHOD(hideMeeting:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject
+) {
+  @try {
+    hideMeetingPromiseResolve = resolve;
+    hideMeetingPromiseReject = reject;
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      [[RNZoomUsManager sharedInstance] hideMeeting:^(NSUInteger resultCode) {
         resolve(@{});
       }];
     }];

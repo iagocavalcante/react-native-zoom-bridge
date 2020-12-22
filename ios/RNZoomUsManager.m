@@ -93,6 +93,17 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
   [emitter userEndedTheMeeting:@{}];
 }
 
+- (void)hideMeeting:(void (^_Nonnull)(NSUInteger resultCode))completion {
+  NSLog(@"hideMeeting called on native module");
+    
+  MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
+  if (ms) {
+    MobileRTCMeetError result = [ms showMinimizeMeetingFromZoomUIMeeting];
+    NSLog(@"hideMobileRTCMeeting, hideMobileRTCMeetingResult=%d", result);
+    completion(1);
+  }
+}
+
 - (void)onMeetingStateChange:(MobileRTCMeetingState)state {
   NSLog(@"onMeetingStatusChanged, meetingState=%d", state);
 
