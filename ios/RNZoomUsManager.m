@@ -99,7 +99,7 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
   MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
   if (ms) {
     MobileRTCMeetError result = [ms showMinimizeMeetingFromZoomUIMeeting];
-    NSLog(@"hideMobileRTCMeeting, hideMobileRTCMeetingResult=%d", result);
+    NSLog(@"hideMeeting, hideMeeting=%d", result);
     completion(1);
   }
 }
