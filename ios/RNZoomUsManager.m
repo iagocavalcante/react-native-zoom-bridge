@@ -77,12 +77,6 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
 - (void)onWaitingRoomStatusChange:(BOOL)needWaiting
 {
    NSLog(@"onWaitingRoomStatusChange, needWaiting=%d", needWaiting);
-    if (needWaiting) {
-        // waiting room not supported lets leave meeting
-        RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
-        [emitter meetingWaitingRoomIsActive:@{}];
-        [self leaveMeeting];
-    }
 }
 
 - (void)leaveMeeting {
