@@ -21,13 +21,13 @@ Library updated to use iOS SDK 5.0.24433.0616 and Android SDK version 5.0.24437.
 Install the library from npm:
 
 ```sh
-npm i @mokriya/react-native-zoom-us-bridge --save
+npm i @iagocavalcante/react-native-zoom-us-bridge --save
 ```
 
 or
 
 ```sh
-yarn add @mokriya/react-native-zoom-us-bridge
+yarn add @iagocavalcante/react-native-zoom-us-bridge
 ```
 
 ### Linking
@@ -35,7 +35,7 @@ Library autolinks for React-Native 60 or higher.
 
 RN 59 or lower please make sure to
 ```sh
-react-native link @mokriya/react-native-zoom-us-bridge
+react-native link @iagocavalcante/react-native-zoom-us-bridge
 ```
 
 Then follow the instructions for your platform to add ZoomUS SDK into your project:
@@ -56,7 +56,7 @@ git lfs install
 Setup your Podfile by adding this line inside of your app target (found at ios/Podfile).
 
 ```ruby
-pod 'ZoomSDK', :git => 'https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git'
+pod 'ZoomSDK', :git => 'https://github.com/iagocavalcante-org/zoom-us-ios-sdk-dev-pod.git'
 ```
 
 ***Note***: This particular pod cannot be used for release build. You must use the production Pod instead. However, this pod file does not work with simulators.
@@ -70,7 +70,7 @@ pod install
 ### Production Zoom.us SDK
 
 ```ruby
-`pod 'ZoomSDK', :git => 'https://github.com/mokriya-org/zoom-us-ios-sdk-pod.git'`
+`pod 'ZoomSDK', :git => 'https://github.com/iagocavalcante-org/zoom-us-ios-sdk-pod.git'`
 ```
 </details>
 
@@ -160,7 +160,7 @@ You should avoid hardcoding your App/Jwt key and secret. In our example we hardc
 ### Basic joining meeting
 **APP key and secret is required**
 ```javascript
-import RNZoomUsBridge from '@mokriya/react-native-zoom-us-bridge';
+import RNZoomUsBridge from '@iagocavalcante/react-native-zoom-us-bridge';
 
 RNZoomUsBridge.initialize(
   ZOOM_APP_KEY,
@@ -178,7 +178,7 @@ RNZoomUsBridge.joinMeeting(
 **JWT key and secret is required**
 
 ```javascript
-import RNZoomUsBridge from '@mokriya/react-native-zoom-us-bridge';
+import RNZoomUsBridge from '@iagocavalcante/react-native-zoom-us-bridge';
 
 RNZoomUsBridge.initialize(
   ZOOM_APP_KEY,
@@ -215,7 +215,7 @@ RNZoomUsBridge.startMeeting(
 ### Events from zoom sdk
 Use event emitter to listen for meeting state changes
 ```javascript
-import RNZoomUsBridge, {RNZoomUsBridgeEventEmitter} from '@mokriya/react-native-zoom-us-bridge';
+import RNZoomUsBridge, {RNZoomUsBridgeEventEmitter} from '@iagocavalcante/react-native-zoom-us-bridge';
 
 const meetingEventEmitter = new NativeEventEmitter(RNZoomUsBridgeEventEmitter);
 
@@ -235,7 +235,7 @@ meetingEventEmitter.addListener(
 | meetingEnded         | Status update - Meeting ended without error  |
 | meetingStatusChanged | Status update - Updates the meeting status   |
 | meetingError         | Error - Meeting ended with error             |
-| waitingRoomActive    | Error - Meeting waiting room is active       |
+| waitingRoomActive    | Log - Meeting waiting room is active       |
 
 ## Frequently Asked Questions
 ### Can Zoom US bridge join a meeting created from other zoom apps?
@@ -247,8 +247,8 @@ Yes.
 ### Can Zoom US bridge start a meeting?
 Yes, as long as the user matches the user whom created the meeting.
 
-### Can Zoom US bridge join a meeting that have waiting room?
-No, not currently (iOS only). Android does support waiting room.
+### Can Zoom US bridge join a meeting with waiting room enabled ?
+Yes. This is supported in both iOS and Android.
 
 ### Can Zoom US bridge join a meeting that have not started?
 No, not currently (iOS only).
