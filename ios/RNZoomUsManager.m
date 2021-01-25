@@ -79,12 +79,14 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
    NSLog(@"onWaitingRoomStatusChange, needWaiting=%d", needWaiting);
 }
 
-- (void)leaveMeeting {
+- (void)leaveMeeting:(void (^_Nonnull)(NSUInteger resultCode))completion {
   MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
   if (!ms) return;
   [ms leaveMeetingWithCmd:LeaveMeetingCmd_Leave];
   RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
   [emitter userEndedTheMeeting:@{}];
+  NSLog(@"leaveMeeting, leaveMeeting called");
+  completion(1);
 }
 
 - (void)hideMeeting:(void (^_Nonnull)(NSUInteger resultCode))completion {

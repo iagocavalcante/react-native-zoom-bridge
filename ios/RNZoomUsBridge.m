@@ -21,6 +21,8 @@ typedef enum {
     RCTPromiseRejectBlock hideMeetingPromiseReject;
     RCTPromiseResolveBlock showMeetingPromiseResolve;
     RCTPromiseRejectBlock showMeetingPromiseReject;
+    RCTPromiseResolveBlock leaveMeetingPromiseResolve;
+    RCTPromiseRejectBlock leaveMeetingPromiseReject;
 }
 
 static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
@@ -161,6 +163,23 @@ RCT_EXPORT_METHOD(
         }];
     } @catch (NSError *ex) {
       reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing showMeeting", ex);
+    }
+}
+
+RCT_EXPORT_METHOD(
+  leaveMeeting:(RCTPromiseResolveBlock)resolve
+  rejecter:(RCTPromiseRejectBlock)reject
+) {
+    @try {
+        leaveMeetingPromiseResolve = resolve;
+        leaveMeetingPromiseReject = reject;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+          [[RNZoomUsManager sharedInstance] leaveMeeting:^(NSUInteger resultCode) {
+            resolve(@{});
+          }];
+        }];
+    } @catch (NSError *ex) {
+      reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing leaveMeeting", ex);
     }
 }
 

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)startMeeting:(NSString *)meetingId userName:(NSString *)userName userId:(NSString *)userId userZak:(NSString *)userZak completion:(void (^_Nonnull)(NSUInteger resultCode))completion;
 - (void)hideMeeting:(void (^_Nonnull)(NSUInteger resultCode))completion;
 - (void)showMeeting:(void (^_Nonnull)(NSUInteger resultCode))completion;
+- (void)leaveMeeting:(void (^_Nonnull)(NSUInteger resultCode))completion;
 
 
 @end
