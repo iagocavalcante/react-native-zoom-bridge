@@ -23,6 +23,8 @@ typedef enum {
     RCTPromiseRejectBlock showMeetingPromiseReject;
     RCTPromiseResolveBlock leaveMeetingPromiseResolve;
     RCTPromiseRejectBlock leaveMeetingPromiseReject;
+    RCTPromiseResolveBlock setSdkLocalePromiseResolve;
+    RCTPromiseRejectBlock setSdkLocalePromiseReject;
 }
 
 static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
@@ -38,6 +40,10 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
         hideMeetingPromiseReject = nil;
         showMeetingPromiseResolve = nil;
         showMeetingPromiseReject = nil;
+        leaveMeetingPromiseResolve = nil;
+        leaveMeetingPromiseReject = nil;
+        setSdkLocalePromiseResolve = nil;
+        setSdkLocalePromiseReject = nil
     }
   return self;
 }
@@ -180,6 +186,24 @@ RCT_EXPORT_METHOD(
         }];
     } @catch (NSError *ex) {
       reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing leaveMeeting", ex);
+    }
+}
+
+RCT_EXPORT_METHOD(
+  setSdkLocale:(NSString *)locale
+  (RCTPromiseResolveBlock)resolve
+  rejecter:(RCTPromiseRejectBlock)reject
+) {
+    @try {
+        setSdkLocalePromiseResolve = resolve;
+        setSdkLocalePromiseReject = reject;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+          [[RNZoomUsManager sharedInstance] setSdkLocale:locale completion: ^(NSUInteger resultCode) {
+            resolve(@{});
+          }];
+        }];
+    } @catch (NSError *ex) {
+      reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing setSdkLocale", ex);
     }
 }
 

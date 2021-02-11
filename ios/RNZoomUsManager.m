@@ -113,6 +113,14 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
   }
 }
 
+- (void)setSdkLocale:(NSString *)locale completion:(void (^_Nonnull)(NSUInteger resultCode))completion {
+  MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
+  if (!ms) return;
+  [[MobileRTC sharedRTC] setLanguage: locale];
+  NSLog(@"setSdkLocale, setSdkLocale=%s", locale);
+  completion(1);
+}
+
 - (void)onMeetingStateChange:(MobileRTCMeetingState)state {
   NSLog(@"onMeetingStatusChanged, meetingState=%d", state);
 
