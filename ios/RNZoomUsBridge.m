@@ -43,7 +43,7 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
         leaveMeetingPromiseResolve = nil;
         leaveMeetingPromiseReject = nil;
         setSdkLocalePromiseResolve = nil;
-        setSdkLocalePromiseReject = nil
+        setSdkLocalePromiseReject = nil;
     }
   return self;
 }
@@ -191,7 +191,7 @@ RCT_EXPORT_METHOD(
 
 RCT_EXPORT_METHOD(
   setSdkLocale:(NSString *)locale
-  (RCTPromiseResolveBlock)resolve
+  resolver:(RCTPromiseResolveBlock)resolve
   rejecter:(RCTPromiseRejectBlock)reject
 ) {
     @try {

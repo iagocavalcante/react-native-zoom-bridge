@@ -117,7 +117,7 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
   MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
   if (!ms) return;
   [[MobileRTC sharedRTC] setLanguage: locale];
-  NSLog(@"setSdkLocale, setSdkLocale=%s", locale);
+  NSLog(@"setSdkLocale, setSdkLocale=%@", locale);
   completion(1);
 }
 
