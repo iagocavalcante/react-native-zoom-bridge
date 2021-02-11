@@ -1,7 +1,7 @@
 {
   "name": "@iagocavalcante/react-native-zoom-us-bridge",
   "title": "React Native Zoom Us Bridge",
-  "version": "0.0.80",
+  "version": "0.0.81",
   "description": "A basic wrapper of Zoom US iOS/Android for React Native",
   "main": "index.js",
   "scripts": {
