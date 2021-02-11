@@ -213,6 +213,30 @@ public class RNZoomUsBridgeModule extends ReactContextBaseJavaModule implements 
         }
     }
 
+    @ReactMethod
+    public void setSdkLocale(
+            final String language,
+            Promise promise
+    ) {
+        try {
+            meetingPromise = promise;
+            Locale locale = new Locale(language);
+
+            ZoomSDK zoomSDK = ZoomSDK.getInstance();
+            if(!zoomSDK.isInitialized()) {
+                promise.reject("ERR_ZOOM_LEAVE_MEETING", "ZoomSDK has not been initialized successfully");
+                return;
+            }
+
+            zoomSDK.setSdkLocale(reactContext.getCurrentActivity(), locale);
+
+            Log.i(TAG, "setSdkLocale, " + locale);
+            promise.resolve("Locale set with " + locale + " successed");
+        } catch (Exception ex) {
+            promise.reject("ERR_UNEXPECTED_EXCEPTION", ex);
+        }
+    }
+
     @Override
     public void onZoomSDKInitializeResult(int errorCode, int internalErrorCode) {
         Log.i(TAG, "onZoomSDKInitializeResult, errorCode=" + errorCode + ", internalErrorCode=" + internalErrorCode);
