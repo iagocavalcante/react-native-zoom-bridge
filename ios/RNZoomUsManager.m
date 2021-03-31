@@ -113,6 +113,14 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
   }
 }
 
+- (void)setMeetingInviteHidden:(NSString *)hidden completion:(void (^_Nonnull)(NSUInteger resultCode)) completion {
+    MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
+    [[MobileRTC sharedRTC] getMeetingSettings].meetingInviteHidden = hidden;
+    if (!ms) return;
+    NSLog(@"setMeetingInviteHidden, setMeetingInviteHidden=%@", hidden);
+    completion(1);
+}
+
 - (void)setSdkLocale:(NSString *)locale completion:(void (^_Nonnull)(NSUInteger resultCode))completion {
   MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
   if (!ms) return;

@@ -207,6 +207,24 @@ RCT_EXPORT_METHOD(
     }
 }
 
+RCT_EXPORT_METHOD(
+  setMeetingInviteHidden:(NSString *)hidden
+  resolver:(RCTPromiseResolveBlock)resolve
+  rejecter:(RCTPromiseRejectBlock)reject
+) {
+    @try {
+        setSdkLocalePromiseResolve = resolve;
+        setSdkLocalePromiseReject = reject;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+          [[RNZoomUsManager sharedInstance] setMeetingInviteHidden:hidden completion: ^(NSUInteger resultCode) {
+            resolve(@{});
+          }];
+        }];
+    } @catch (NSError *ex) {
+      reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing setMeetingInviteHidden", ex);
+    }
+}
+
 RCT_EXPORT_METHOD(createJWT: (NSString *)jwtApiKey
                   withApiSecret: (NSString *)jwtApiSecret
                   withResolve: (RCTPromiseResolveBlock)resolve

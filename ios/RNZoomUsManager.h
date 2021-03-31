@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showMeeting:(void (^_Nonnull)(NSUInteger resultCode))completion;
 - (void)leaveMeeting:(void (^_Nonnull)(NSUInteger resultCode))completion;
 - (void)setSdkLocale:(NSString *)locale completion:(void (^_Nonnull)(NSUInteger resultCode))completion;
+- (void)setMeetingInviteHidden:(NSString *)hidden completion:(void (^_Nonnull)(NSUInteger resultCode))completion;
 
 @end
 
