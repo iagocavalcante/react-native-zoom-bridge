@@ -238,31 +238,6 @@ public class RNZoomUsBridgeModule extends ReactContextBaseJavaModule implements 
         }
     }
 
-    @ReactMethod
-    public void setMeetingInviteHidden(
-            final Boolean hidden,
-            Promise promise
-    ) {
-        try {
-            meetingPromise = promise;
-
-            ZoomSDK zoomSDK = ZoomSDK.getInstance();
-            if(!zoomSDK.isInitialized()) {
-                promise.reject("ERR_ZOOM_LEAVE_MEETING", "ZoomSDK has not been initialized successfully");
-                return;
-            }
-
-            final MeetingService meetingService = zoomSDK.getMeetingService();
-
-            meetingService.meetingInviteHidden(hidden);
-
-            Log.i(TAG, "setMeetingInviteHidden, " + hidden);
-            promise.resolve("setMeetingInviteHidden " + hidden + " successed");
-        } catch (Exception ex) {
-            promise.reject("ERR_UNEXPECTED_EXCEPTION", ex);
-        }
-    }
-
     @Override
     public void onZoomSDKInitializeResult(int errorCode, int internalErrorCode) {
         Log.i(TAG, "onZoomSDKInitializeResult, errorCode=" + errorCode + ", internalErrorCode=" + internalErrorCode);
