@@ -9,8 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iagocavalcante/react-native-zoom-us-bridge.git",
-    "baseUrl": "https://github.com/iagocavalcante/react-native-zoom-us-bridge"
+    "url": "git+https://github.com/iagocavalcante/react-native-zoom-bridge.git",
+    "baseUrl": "https://github.com/iagocavalcante/react-native-zoom-bridge"
   },
   "keywords": [
     "react",
@@ -18,7 +18,7 @@
     "zoom",
     "zoom sdk"
   ],
-  "author": "Iago Cavalcante <info@mokriya.com>",
+  "author": "Iago Cavalcante <contato@iagocavalcante.dev>",
   "license": "MIT",
   "licenseFilename": "LICENSE",
   "peerDependencies": {
@@ -30,7 +30,7 @@
     "react-native": "^0.61.5"
   },
   "bugs": {
-    "url": "https://github.com/iagocavalcante/react-native-zoom-us-bridgeissues"
+    "url": "https://github.com/iagocavalcante/react-native-zoom-bridge/issues"
   },
-  "homepage": "https://github.com/iagocavalcante/react-native-zoom-us-bridge#readme"
+  "homepage": "https://github.com/iagocavalcante/react-native-zoom-bridge#readme"
 }

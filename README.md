@@ -56,7 +56,7 @@ git lfs install
 Setup your Podfile by adding this line inside of your app target (found at ios/Podfile).
 
 ```ruby
-pod 'ZoomSDK', :git => 'https://github.com/iagocavalcante-org/zoom-us-ios-sdk-dev-pod.git'
+pod 'ZoomSDK', :git => 'https://github.com/iagocavalcante/zoom-sdk-ios.git'
 ```
 
 ***Note***: This particular pod cannot be used for release build. You must use the production Pod instead. However, this pod file does not work with simulators.
@@ -70,7 +70,7 @@ pod install
 ### Production Zoom.us SDK
 
 ```ruby
-`pod 'ZoomSDK', :git => 'https://github.com/iagocavalcante-org/zoom-us-ios-sdk-pod.git'`
+`pod 'ZoomSDK', :git => 'https://github.com/iagocavalcante/zoom-sdk-ios.git'`
 ```
 </details>
 
@@ -249,6 +249,9 @@ Yes, as long as the user matches the user whom created the meeting.
 
 ### Can Zoom US bridge join a meeting with waiting room enabled ?
 Yes. This is supported in both iOS and Android.
+
+### Can Zoom US bridge change default language ?
+Yes. This is supported only in iOS.
 
 ### Can Zoom US bridge join a meeting that have not started?
 No, not currently (iOS only).
